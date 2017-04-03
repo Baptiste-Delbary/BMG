@@ -1,0 +1,54 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+<div id="content">
+    <h2>Gestion des genres</h2>
+    {# Affichage des messages fash #}
+    {% for flash_message in app.session.flashBag.get('error') %}
+    <div class="erreur">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    
+    {% for flash_message in app.session.flashBag.get('notice') %}
+    <div class="info">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    <div class="corps-form">
+        <!--- afficher la liste des genres -->
+        <div id="object-list">
+            {% if lesGenres != NULL %}
+                {% set nbGenres = lesGenres | length %}
+                <div class='nbResu'>{{nbGenres}} 
+                {% if nbGenres > 1 %}
+                    genres trouvés
+                {% else %}
+                    genre trouvé
+                {% endif %}
+                <a href="{{path('bmg_ajouter_genre') }}" title="Ajouter" class='btAdd'>+ Add</a></div>
+                {# afficher un tableau des genres #}
+                {%if nbGenres > 0 %}
+                    <table>
+                        <tr>
+                            <th>Code</th>
+                            <th>Libelle</th>
+                            <th colspan='3'>Options</th>
+                        </tr>
+                        {% for unGenre in lesGenres %}
+                            {% set id = unGenre.getCodeGenre()%}
+                                <td>{{id}}</td>
+                                <td>{{unGenre.getLibGenre()}}</td>
+                                <td align='left'><a href="{{path('bmg_consulter_genre', {'id':id})}}" class='btConsult'/><img src='{{asset('gestBMG/img/oeil.png')}}' /></a>
+                                <a href="{{path('bmg_modifier_genre', {'id':id})}}" class='btEdit'/>Edit</a>
+                                <a href="{{path('bmg_supprimer_genre', {'id':id})}}" class='btDelete'/>Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            {% else %}
+                Aucun genre trouvé !
+            {% endif%}
+        </div>
+    </div>
+</div>
+{% endblock %}

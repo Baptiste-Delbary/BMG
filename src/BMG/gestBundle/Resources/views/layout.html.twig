@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BMG - Bibliothèque municipale de Groville</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{asset('gestBMG/css/screen.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('gestBMG/css/font-awesome.css')}}" />
+        <link rel='stylesheet' media="screen and (max-width: 1023px)" href="{{asset('gestBMG/css/petit_screen.css')}}"/>
+        <meta name="theme-color" content="#3ac5d9">
+        <meta name="msapplication-TileColor" content="#3ac5d9">
+        <meta name="msapplication-navbutton-color" content="#3ac5d9">
+        <meta name="apple-mobile-web-app-status-bar-style" content="#3ac5d9">
+    </head>
+    <body>
+        <header id="main-header">
+            <div>
+                <span class="titre-entete">
+                    Bibliothèque municipale de Groville
+                </span>
+            </div>
+            <div id="infos-util">
+                {%if(app.session.get('nom') is defined )%}
+                    Connecté : {{app.session.get('nom')}} {{app.session.get('prenom')}}
+                {%endif%}
+            </div>
+        </header>
+            <nav>
+                <div id="left-menu">
+                    <ul id="menu-list">
+                        <li class="smenu">
+                            <a href="{{path('bmg_gest_home')}}"
+                               title="Accueil">Accueil
+                            </a>
+                        </li>
+                        <li class="smenu">
+                            <a href="{{path('bmg_lister_ouvrages')}}"
+                               title="Ouvrages">Gestion des ouvrages
+                            </a>
+                        </li>
+                        <li class="smenu">
+                            <a href="{{path('bmg_lister_genres')}}"
+                               title="Genres">Gestion des genres
+                            </a>
+                        </li>
+                        <li class="smenu">
+                            <a href="{{path('bmg_lister_auteurs')}}"
+                               title="Auteurs">Gestion des auteurs
+                            </a>
+                        </li>
+                        <li class="smenu">
+                            <a href=""
+                               title="Se deconnecter">Déconnexion
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div id='contenu'>
+            <!-- Contenu -->
+            {% block contenu %}
+                {%block contenuSuite %}
+                {%endblock %}
+            {% endblock %}
+            <!-- Pied de page -->
+            </div>
+    </body>
+</html>

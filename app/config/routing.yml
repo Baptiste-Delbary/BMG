@@ -1,0 +1,7 @@
+bm_ggest:
+    resource: "@BMGgestBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

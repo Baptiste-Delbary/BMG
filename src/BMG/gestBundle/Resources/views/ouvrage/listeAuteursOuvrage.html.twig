@@ -1,0 +1,56 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+<div id="content">
+    <h2>Supprimer un auteur de l'ouvrage : {{ leOuvrage.getTitre() }}</h2>
+    {# Affichage des messages fash #}
+    {% for flash_message in app.session.flashBag.get('error') %}
+    <div class="erreur">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    
+    {% for flash_message in app.session.flashBag.get('notice') %}
+    <div class="info">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    <div class="corps-form">
+        <!--- afficher la liste des genres -->
+        <div id="object-list">
+            {% set idOuvrage = leOuvrage.getNoOuvrage()%}
+            {% if lesAuteurs != NULL %}
+                {% set nbAuteurs = lesAuteurs | length %}
+                <div class='nbResu'>{{nbAuteurs}}
+                {% if nbAuteurs > 1 %}
+                    auteurs trouvés
+                {% else %}
+                    auteur trouvé
+                {% endif %}
+                </div>
+                {# afficher un tableau des genres #}
+                {% if nbAuteurs > 0 %}
+                    <table>
+                        <tr>
+                            <th>No</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Option</th>
+                        </tr>
+                        {% for unAuteur in lesAuteurs %}
+                            {% set idAuteur = unAuteur.getidAuteur()%}
+                                <td>{{idAuteur}}</td>
+                                <td>{{unAuteur.getNomAuteur()}}</td>
+                                <td>{{unAuteur.getPrenomAuteur()}}</td>
+                                <td align='left'><a href="{{path('bmg_supprimer_auteur_ouvrage', {'idOuvrage':idOuvrage, 'idAuteur':idAuteur})}}" class='btDelete'/>Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            {% else %}
+                Aucun genre trouvé !
+            {% endif%}
+        </div>
+        <a href="{{path('bmg_consulter_ouvrage', {'id':idOuvrage})}}" class='bouton'>Retour</a>
+    </div>
+</div>
+{% endblock %}

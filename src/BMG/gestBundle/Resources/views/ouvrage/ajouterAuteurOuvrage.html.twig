@@ -1,0 +1,40 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Ajouter un auteur à l'ouvrage : {{ leOuvrage.getTitre() }}</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="erreur">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        
+        <div id="object-list">
+            <div class="corps-form">
+                {# {{ form(form) }} #}
+                    {{ form_start(form, {'attr': {'class': 'corps-form'}}) }}
+                    
+                    {# Les erreurs générales du formulaire #}
+                    {{ form_errors(form) }}
+                    <table>
+                        <tr>
+                            <td>
+                                {{ form_label(form.auteurs, "Auteur :") }}
+                                {{ form_errors(form.auteurs) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.auteurs) }}
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="pied-form">
+                {{ form_widget(form.save, {'label' : 'Ajouter'} )}}
+                {{ form_rest(form) }}
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

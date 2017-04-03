@@ -1,0 +1,63 @@
+bmg_gest_home:
+    path:     /
+    defaults: { _controller: BMGgestBundle:Default:index }
+
+
+bmg_lister_genres:
+    path:   /listerGenres
+    defaults: { _controller: BMGgestBundle:gererGenres:index }
+bmg_consulter_genre:
+    path:   /consulterGenre/{id}
+    defaults: { _controller: BMGgestBundle:gererGenres:consulter, id : 000 }
+bmg_ajouter_genre:
+    path:   /ajouterGenre
+    defaults: { _controller: BMGgestBundle:gererGenres:ajouter }
+bmg_modifier_genre:
+    path:   /modifierGenre/{id}
+    defaults: { _controller: BMGgestBundle:gererGenres:modifier, id : 000 }
+bmg_supprimer_genre:
+    path:   /supprimerGenre/{id}
+    defaults: { _controller: BMGgestBundle:gererGenres:supprimer, id : 000 }
+
+
+bmg_lister_auteurs:
+    path:   /listerAuteurs
+    defaults: { _controller: BMGgestBundle:gererAuteurs:index }
+bmg_consulter_auteur:
+    path:   /consulterAuteur/{id}
+    defaults: { _controller: BMGgestBundle:gererAuteurs:consulter, id : 000 }
+bmg_ajouter_auteur:
+    path:   /ajouterAuteur
+    defaults: { _controller: BMGgestBundle:gererAuteurs:ajouter }
+bmg_modifier_auteur:
+    path:   /modifierAuteur/{id}
+    defaults: { _controller: BMGgestBundle:gererAuteurs:modifier, id : 000 }
+bmg_supprimer_auteur:
+    path:   /supprimerAuteur/{id}
+    defaults: { _controller: BMGgestBundle:gererAuteurs:supprimer, id : 000 }
+
+
+bmg_lister_ouvrages:
+    path:   /listerOuvrages
+    defaults: { _controller: BMGgestBundle:gererOuvrages:index }
+bmg_consulter_ouvrage:
+    path:   /consulterOuvrage/{id}
+    defaults: { _controller: BMGgestBundle:gererOuvrages:consulter, id : 000 }
+bmg_ajouter_ouvrage:
+    path:   /ajouterOuvrage
+    defaults: { _controller: BMGgestBundle:gererOuvrages:ajouter }
+bmg_modifier_ouvrage:
+    path:   /modifierOuvrage/{id}
+    defaults: { _controller: BMGgestBundle:gererOuvrages:modifier, id : 000 }
+bmg_supprimer_ouvrage:
+    path:   /supprimerOuvrage/{id}
+    defaults: { _controller: BMGgestBundle:gererOuvrages:supprimer, id : 000 }
+bmg_lister_auteurs_ouvrage:
+    path:   /listerAuteursOuvrage/{id}
+    defaults: { _controller: BMGgestBundle:gererOuvrages:listerauteursouvrage, id : 000 }
+bmg_ajouter_auteur_ouvrage:
+    path:   /ajouterAuteurOuvrage/{id}
+    defaults: { _controller: BMGgestBundle:gererOuvrages:ajouterauteur, id : 000 }
+bmg_supprimer_auteur_ouvrage:
+    path:   /supprimerAuteurOuvrage/{idOuvrage}/{idAuteur}
+    defaults: { _controller: BMGgestBundle:gererOuvrages:supprimerauteur, idOuvrage : 000, idAuteur : 000 }

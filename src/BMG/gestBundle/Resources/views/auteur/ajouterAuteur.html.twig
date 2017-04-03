@@ -1,0 +1,67 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Ajouter un auteur</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="erreur">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        
+        <div id="object-list">
+            <div class="corps-form">
+                {# {{ form(form) }} #}
+                    {{ form_start(form, {'attr': {'class': 'corps-form'}}) }}
+                    
+                    {# Les erreurs générales du formulaire #}
+                    {{ form_errors(form) }}
+                    <table>
+                        <tr>
+                            <td>
+                                {{ form_label(form.nom_auteur, "Nom :") }}
+                                {{ form_errors(form.nom_auteur) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.nom_auteur) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.prenom_auteur, "Prénom :") }}
+                                {{ form_errors(form.prenom_auteur) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.prenom_auteur) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.alias, "Alias :") }}
+                                {{ form_errors(form.alias) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.alias) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.notes, "Notes :") }}
+                                {{ form_errors(form.notes) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.notes) }}
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="pied-form">
+                {{ form_widget(form.save, {'label' : 'Ajouter'} )}}
+                {{ form_rest(form) }}
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

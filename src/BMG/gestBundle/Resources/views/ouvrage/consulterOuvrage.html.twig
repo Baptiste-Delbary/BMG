@@ -1,0 +1,92 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Consulter l'ouvrage : {{ leOuvrage.getTitre() }}</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="erreur">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="info">
+                {{ flash_message}}
+            </div>
+        {% endfor %}
+        <div id="object-list">
+            <div class="corps-form">
+                <div id="breadcrumb">
+                    {% set id = leOuvrage.getNoOuvrage() %}
+                    <a href="{{path('bmg_lister_ouvrages')}}" class='bouton'>Retour</a>
+                    <a href="{{ path('bmg_ajouter_ouvrage') }}" class='btAdd2'>+ Add</a>&nbsp;
+                    <a href="{{ path('bmg_modifier_ouvrage', {'id':id}) }}" class='btEdit'>Edit</a>&nbsp;
+                    <a href="{{ path('bmg_supprimer_ouvrage', {'id':id}) }}" class='btDelete'>Delete</a>&nbsp;
+                    <a href="{{ path('bmg_ajouter_auteur_ouvrage', {'id':id}) }}" class='btAdd2'>Add auteur</a>&nbsp;
+                    <a href="{{ path('bmg_lister_auteurs_ouvrage', {'id':id}) }}" class='btDelete'>Delete auteur</a>&nbsp;
+                </div>
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <td>{{id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{leOuvrage.getTitre()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Salle, rayon</th>
+                        <td>{{leOuvrage.getSalle()}}, {{leOuvrage.getRayon()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Genre</th>
+                        <td>{{leOuvrage.getGenre().getLibGenre()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Auteurs</th>
+                        <td>
+                            {% set lesAuteurs = leOuvrage.getAuteurs()%}
+                            {% set nbAuteurs = lesAuteurs | length %}
+                            {% set m = 0%}
+                            {% for unAuteur in lesAuteurs %}
+                                <a href="{{ path('bmg_consulter_auteur', {'id':unAuteur.getIdAuteur()}) }}">{{unAuteur.getPrenomAuteur()}} {{unAuteur.getNomAuteur()}}</a>
+                                {% set m = m+1 %}
+                                {% if m < nbAuteurs %}
+                                    <text>, </text>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Dernier prêt</th>
+                        <td>
+                        {% if lePret != NULL %}
+                            {{lePret.getDateEmp()|date('d/m/Y')}}
+                        {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Disponibilité</th>
+                        <td>
+                        {% if lePret != NULL %}
+                            {% if lePret.getDateRet() == NULL %}
+                                <!-- Indisponible -->
+                                <span class='indisponible'></span>
+                            {% elseif lePret.getDateRet()|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                <!-- Indisponible -->
+                                <span class='indisponible'></span>
+                            {% else %}
+                                <!-- Disponible -->
+                                <span class='disponible'></span>
+                            {% endif %}
+                        {% else %}
+                            <!-- Disponible -->
+                            <span class='disponible'></span>
+                        {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

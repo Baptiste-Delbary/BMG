@@ -1,0 +1,76 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Modifier l'ouvrage : {{ leOuvrage.getTitre() }}</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="erreur">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        
+        <div id="object-list">
+            <div class="corps-form">
+                {# {{ form(form) }} #}
+                    {{ form_start(form, {'attr': {'class': 'corps-form'}}) }}
+                    
+                    {# Les erreurs générales du formulaire #}
+                    {{ form_errors(form) }}
+                    <table>
+                        <tr>
+                            <td>
+                                {{ form_label(form.titre, "Titre :") }}
+                                {{ form_errors(form.titre) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.titre) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.salle, "Salle :") }}
+                                {{ form_errors(form.salle) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.salle) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.rayon, "Rayon :") }}
+                                {{ form_errors(form.rayon) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.rayon) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.genre, "Genre :") }}
+                                {{ form_errors(form.genre) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.genre) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.date_acquisition, "Date acquisition :") }}
+                                {{ form_errors(form.date_acquisition) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.date_acquisition) }}
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="pied-form">
+                {{ form_widget(form.save, {'label' : 'Modifier'} )}}
+                {{ form_rest(form) }}
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

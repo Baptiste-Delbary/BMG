@@ -1,0 +1,49 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Ajouter un genre</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="erreur">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        
+        <div id="object-list">
+            <div class="corps-form">
+                {# {{ form(form) }} #}
+                    {{ form_start(form, {'attr': {'class': 'corps-form'}}) }}
+                    
+                    {# Les erreurs générales du formulaire #}
+                    {{ form_errors(form) }}
+                    <table>
+                        <tr>
+                            <td>
+                                {{ form_label(form.codeGenre, "Code genre :") }}
+                                {{ form_errors(form.codeGenre) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.codeGenre) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form_label(form.libGenre, "Libelle :") }}
+                                {{ form_errors(form.libGenre) }}
+                            </td>
+                            <td>
+                                {{ form_widget(form.libGenre) }}
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="pied-form">
+                {{ form_widget(form.save, {'label' : 'Ajouter'} )}}
+                {{ form_rest(form) }}
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+nav #left-menu{
+    display: block;
+    float: none;
+    position: relative;
+    width:100%;
+}
+#content{
+    margin-left: 0;
+}
+h2{
+    font-size: 1.3em;
+}
+h3{
+    font-size: 1em;
+}
+.titre-entete{
+    font-size: 2.5em;
+}
+.gro-titre{
+    font-size: 5em;
+}
+#content h2{
+    font-size: 2em;
+}
+nav #left-menu li a, .corps-form #object-list th{
+    font-size: 2em;
+}
+.corps-form #object-list td{
+    font-size: 1.2em;
+}
+.nbResu{
+    font-size: 1.4em;
+}
+.bouton, .btAdd2, .btEdit, .btDelete{
+    font-size: 1.5em;
+}
+.corps-form #object-list .btAdd{
+    font-size: 0.8em;
+}
+.corps-form #object-list .btConsult, .corps-form #object-list .btEdit, .corps-form #object-list  .btDelete{
+    text-align: center;
+    margin: 2px;
+}
+.corps-form #object-list .btEdit{
+    width: 50px;
+}
+.corps-form #object-list .btDelete{
+    width: 85px;
+}
+.corps-form #object-list .btConsult{
+    display: inline-block;
+}
+.corps-form #object-list .btConsult img{
+    width:40px;
+}
+.erreur, .info{
+    font-size: 2em;
+}

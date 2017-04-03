@@ -1,0 +1,54 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+<div id="content">
+    <h2>Gestion des auteurs</h2>
+    {# Affichage des messages fash #}
+    {% for flash_message in app.session.flashBag.get('error') %}
+    <div class="erreur">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    
+    {% for flash_message in app.session.flashBag.get('notice') %}
+    <div class="info">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    <div class="corps-form">
+        <!--- afficher la liste des auteurs -->
+        <div id="object-list">
+            {% if lesAuteurs != NULL %}
+                {% set nbAuteurs = lesAuteurs | length %}
+                <div class='nbResu'>{{nbAuteurs}} 
+                {% if nbAuteurs > 1%}
+                    auteurs trouvés
+                {% else %}
+                    auteur trouvé
+                {% endif %}
+                <a href="{{path('bmg_ajouter_auteur') }}" title="Ajouter" class='btAdd'>+ Add</a></div>
+                {# afficher un tableau des auteurs #}
+                {%if nbAuteurs > 0 %}
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom Prénom</th>
+                            <th colspan='3'>Options</th>
+                        </tr>
+                        {% for unAuteur in lesAuteurs %}
+                            {% set id = unAuteur.getIdAuteur()%}
+                                <td>{{id}}</td>
+                                <td>{{unAuteur.getPrenomAuteur()}} {{unAuteur.getNomAuteur()}}</td>
+                                <td align='left'><a href="{{path('bmg_consulter_auteur', {'id':id})}}" class='btConsult'/><img src='{{asset('gestBMG/img/oeil.png')}}' /></a>
+                                <a href="{{path('bmg_modifier_auteur', {'id':id})}}" class='btEdit'/>Edit</a>
+                                <a href="{{path('bmg_supprimer_auteur', {'id':id})}}" class='btDelete'/>Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            {% else %}
+                Aucun auteur trouvé !
+            {% endif%}
+        </div>
+    </div>
+</div>
+{% endblock %}

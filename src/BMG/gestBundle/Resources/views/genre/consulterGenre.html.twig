@@ -1,0 +1,35 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Consulter le genre : {{ leGenre.getLibGenre() }}</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="info">
+                {{ flash_message}}
+            </div>
+        {% endfor %}
+        
+        <div id="object-list">
+            <div class="corps-form">
+                <div id="breadcrumb">
+                    {% set id = leGenre.getCodeGenre() %}
+                    <a href="{{path('bmg_lister_genres')}}" class='bouton'>Retour</a>
+                    <a href="{{ path('bmg_ajouter_genre') }}" class='btAdd2'>+ Add</a>&nbsp;
+                    <a href="{{ path('bmg_modifier_genre', {'id':id}) }}" class='btEdit'>Edit</a>&nbsp;
+                    <a href="{{ path('bmg_supprimer_genre', {'id':id}) }}" class='btDelete'>Delete</a>&nbsp;
+                </div>
+                <table>
+                    <tr>
+                        <th>Code</th>
+                        <td>{{id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Libelle</th>
+                        <td>{{leGenre.getLibGenre()}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

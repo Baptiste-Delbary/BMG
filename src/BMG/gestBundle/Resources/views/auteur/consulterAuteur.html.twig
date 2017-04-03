@@ -1,0 +1,61 @@
+{% extends "BMGgestBundle::layout.html.twig"%}
+{% block contenu %}
+    <div id="content">
+        <h2>Consulter l'auteur : {{ leAuteur.getNomAuteur() }}</h2>
+        
+        {# Affichage des messages flash #}
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="info">
+                {{ flash_message}}
+            </div>
+        {% endfor %}
+        <div id="object-list">
+            <div class="corps-form">
+                    <div id="breadcrumb">
+                        {% set id = leAuteur.getIdAuteur() %}
+                        <a href="{{path('bmg_lister_auteurs')}}" class='bouton'>Retour</a>
+                        <a href="{{ path('bmg_ajouter_auteur') }}" class='btAdd2'>+ Add</a>&nbsp;
+                        <a href="{{ path('bmg_modifier_auteur', {'id':id}) }}" class='btEdit'>Edit</a>&nbsp;
+                        <a href="{{ path('bmg_supprimer_auteur', {'id':id}) }}" class='btDelete'>Delete</a>&nbsp;
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{id}}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{leAuteur.getNomAuteur()}}</td>
+                        </tr>
+                        <tr>
+                            <th>Prénom</th>
+                            <td>{{leAuteur.getPrenomAuteur()}}</td>
+                        </tr>
+                        <tr>
+                            <th>Alias</th>
+                            <td>{{leAuteur.getAlias()}}</td>
+                        </tr>
+                        <tr>
+                            <th>Notes</th>
+                            <td>{{leAuteur.getNotes()}}</td>
+                        </tr>
+                        <tr>
+                            <th>Ouvrage(s)</th>
+                            <td>
+                                {% set lesOuvrages = leAuteur.getOuvrages()%}
+                                {% set nbOuvrages = lesOuvrages | length %}
+                                {% set m = 0%}
+                                {% for unOuvrage in lesOuvrages %}
+                                    <a href="{{ path('bmg_consulter_ouvrage', {'id':unOuvrage.getNoOuvrage()}) }}">{{unOuvrage.getTitre()}}</a>
+                                    {% set m = m+1 %}
+                                    {% if m < nbOuvrages %}
+                                        <text>, </text>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
